@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="/src/javascript/misc.js"></script>
+
+    <link rel="stylesheet" href="/src/css/global.css">
+    <link rel="stylesheet" href="/src/css/home.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    
+    <title id="dynamic-title">Bexxi.dev</title>
+    <link id="favicon" rel="icon" href="" type="image/gif"></link>
+    <script src="/src/javascript/favicon.js" defer></script>
+</head>
+<body>
+    <div id="header">
+        <header>
+            <nav>
+                <div class="left">
+                    <a href="/" id="bexxi" data-page="home"><span class="rainbow-glo">Bexxi</span><span class="dotdev" id="dotdev"></span></a>
+                </div>
+
+                <div class="right">
+                    <div class="theme-btn" id="theme-btn"></div>
+                    <a href="/" class="rainbow-hover" data-text="Home" data-page="home">Home</a>
+                    <a href="/about" class="rainbow-hover" data-text="About" data-page="about">About</a>
+                    <a href="/projects" class="rainbow-hover" data-text="Projects" data-page="projects">Projects</a>
+                    <a id="farmost-left" href="/blog" class="rainbow-hover" data-text="Blog" data-page="blog">Blog</a>
+                    <!-- Highlight current page with rainbow glow -->
+                </div>
+            </nav>
+        </header>
+    </div>
+
+    <main id="content">
+        <!-- UwU nya~! -->
+    </main>
+
+    <div id="footer">
+        <footer>
+            <div class="container">
+                <div class="footer-column">
+                    <ul class="footer-column--list" style="margin-left: -2.5rem;">
+                        <li class="footer-columb--list-item-title">
+                            <span>About</span>
+                        </li>
+                        <div class="footer-columb--list-item">
+                            <a href="/about" data-page="about">
+                                <span>Bexxi, Bexxi, Bexxi!!</span>
+                            </a>
+                        </div>
+                        <div class="footer-columb--list-item">
+                            <a href="/about" data-page="about">
+                                <span>This Site</span>
+                            </a>
+                        </div>
+                        <div class="footer-columb--list-item">
+                            <a href="/about" data-page="about">
+                                <span>Contact Me</span>
+                            </a>
+                        </div>
+                    </ul>
+
+                    <ul class="footer-column--list">
+                        <li class="footer-columb--list-item-title">
+                            <span>Pages</span>
+                        </li>
+                        <div class="footer-columb--list-item">
+                            <a href="/" data-page="home">
+                                <span>Home</span>
+                            </a>
+                        </div>
+                        <div class="footer-columb--list-item">
+                            <a href="/about" data-page="about">
+                                <span>About</span>
+                            </a>
+                        </div>
+                        <div class="footer-columb--list-item">
+                            <a href="/blog" data-page="blog">
+                                <span>Blog</span>
+                            </a>
+                        </div>
+                        <div class="footer-columb--list-item">
+                            <a href="/projects" data-page="projects">
+                                <span>Projects</span>
+                            </a>
+                        </div>
+                        <div class="footer-columb--list-item">
+                            <a href="/about" data-page="about">
+                                <span>Contact Me</span>
+                            </a>
+                        </div>
+                    </ul>
+
+                    <ul class="footer-column--list">
+                        <li class="footer-columb--list-item-title">
+                            <span>Elsewhere</span>
+                        </li>
+                        <div class="footer-columb--list-item">
+                            <a href="https://github.com/bexxi002" rel="noopener noreferrer" target="_blank" aria-label="GitHub profile">
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                        <div class="footer-columb--list-item">
+                            <a href="https://www.roblox.com/users/8367186931/profile" rel="noopener noreferrer" target="_blank" aria-label="Roblox profile">
+                                <span>Roblox</span>
+                            </a>
+                        </div>
+                        <div class="footer-columb--list-item">
+                            <a href="https://x.com/bexxi002" rel="noopener noreferrer" target="_blank" aria-label="Twitter / X profile">
+                                <span>Twitter / X</span>
+                            </a>
+                        </div>
+                    </ul>
+                </div>
+
+                <div class="footer-column--lg">
+                    <a id="pfp-link" href="" target="_blank" rel="noopener noreferrer">
+                        <img id="pfp" src="https://cdn.discordapp.com/avatars/1058244018770817095/5b1290324bfc841be5663f4e0c97ec33?size=1024" alt="Bexxi" />
+                    </a>
+
+                    <div><span class="rainbow-glo">Bexxi</span><span class="dotdev-alt">.dev</span></div>
+
+                    <div class="footer-c">
+                        <p>&copy; <span id="year"></span> <span class="rainbow-glo">Bexxi</span> - all rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-site-stats">
+                <p><span class="rainbow-glo">Bexxi</span>.dev <span id="site-version">v1.0</span> · Last updated <span id="last-updated">2025-05-10</span> · commit: <a id="commit-link" href="#" target="_blank" rel="noopener noreferrer"><span id="commit-hash">0.o</span></a></p>
+            </div>
+        </footer>
+    </div>
+
+    <canvas id="canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:1000;"></canvas>
+
+    <script src="/src/javascript/router.js"></script>
+    <script src="/src/javascript/confetti.js"></script>
+    <script src="/src/javascript/dotdev.js"></script>
+    <script src="/src/javascript/stats.js"></script>
+    <script src="/src/javascript/activity.js"></script>
+</body>
+
+<noscript>
+  <style>
+    main, header, footer, canvas { display: none !important; }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    a {
+        text-decoration: underline;
+    }
+  </style>
+  <div>
+    <h2>JavaScript is off :c</h2>
+    <p>This site requires JavaScript to work properly. Please enable it in your browser settings to view <span class="rainbow-glo">Bexxi</span><span>.dev</span>.</p>
+    <br>
+    <p><a href="https://www.enable-javascript.com/" target="_blank" rel="noopener noreferrer" class="rainbow-hover" data-text="How to enable JavaScript">How to enable JavaScript</a></p>
+  </div>
+</noscript>
+
+</html>
