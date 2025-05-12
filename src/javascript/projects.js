@@ -3,17 +3,25 @@ const projectsData = [
         id: 1,
         title: "Personal Website",
         description: "This site is my space to share what I'm working on, explore what I'm learning, and showcase my projects. Whether you're here to check out my work or just get to know me, I'm glad you stopped by!",
-        tags: ["web", "design", "app", "roblox"],
+        tags: ["web", "design", "app"],
         demoLink: "https://bexxi.dev",
-        githubLink: "https://github.com/bexxi002/bexxi.dev-parking"
+        githubLink: "https://github.com/bexxi002/bexxi.dev"
     },
     {
         id: 2,
-        title: "Personal Website Parking Page",
-        description: "This site is my space to share what I'm working on, explore what I'm learning, and showcase my projects. Whether you're here to check out my work or just get to know me, I'm glad you stopped by!",
-        tags: ["web", "design", "app", "roblox"],
-        demoLink: "https://bexxi.dev",
-        githubLink: "https://github.com/bexxi002/bexxi.dev-parking"
+        title: "Candleworks",
+        description: "Candleworks is my Roblox game studio where I'm exploring ideas for more polished, professional projects. Nothing's released yet, but I'm hoping to share something someday. For smaller experiments, check out Candleworks Lite.",
+        tags: ["roblox"],
+        demoLink: "https://www.roblox.com/communities/35961624/Candleworks#!/about",
+        githubLink: null
+    },
+    {
+        id: 2,
+        title: "Candleworks Lite",
+        description: "Candleworks Lite is a space for quick, scrappy, or just-for-fun Roblox projects. It's where I test ideas, try new things, and release smaller games without the pressure of polish.",
+        tags: ["roblox"],
+        demoLink: "https://www.roblox.com/communities/35961632/Candleworks-Lite#!/about",
+        githubLink: null
     }
 ];
 
@@ -91,10 +99,98 @@ const ThumbnailManager = {
             return char.charCodeAt(0) + ((acc << 5) - acc);
         }, 0);
         
-        const hue = Math.abs(hash) % 360;
-        const colorHex = this.hslToHex(hue, 70, 60);
+        const hue1 = Math.abs(hash) % 360;
+        const hue2 = (hue1 + 40) % 360;
         
-        return `https://dummyimage.com/400x300/${colorHex}/ffffff&text=${encodeURIComponent(title.substring(0, 15))}`;
+        const canvas = document.createElement('canvas');
+        canvas.width = 400;
+        canvas.height = 300;
+        const ctx = canvas.getContext('2d');
+        
+        const gradient = ctx.createLinearGradient(0, 0, 400, 300);
+        gradient.addColorStop(0, `hsl(${hue1}, 80%, 65%)`);
+        gradient.addColorStop(1, `hsl(${hue2}, 75%, 55%)`);
+        
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 400, 300);
+        
+        ctx.globalAlpha = 0.05;
+        for (let i = 0; i < 400; i += 20) {
+            ctx.beginPath();
+            ctx.moveTo(i, 0);
+            ctx.lineTo(i, 300);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(0, i);
+            ctx.lineTo(400, i);
+            ctx.stroke();
+        }
+        ctx.globalAlpha = 1.0;
+        
+        const displayText = title.length > 20 ? title.substring(0, 18) + '...' : title;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+        ctx.shadowBlur = 10;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 32px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif';
+        ctx.fillText(displayText, 200, 150);
+        
+        const projectType = this.getProjectType(projectId, title);
+        this.drawProjectIcon(ctx, projectType, 200, 220);
+        
+        return canvas.toDataURL('image/png');
+    },
+
+    getProjectType(projectId, title) {
+    const project = projectsData.find(p => p.id === projectId);
+    if (project) {
+        if (project.tags.includes('roblox')) return 'game';
+        if (project.tags.includes('web')) return 'web';
+        if (project.tags.includes('app')) return 'app';
+        if (project.tags.includes('design')) return 'design';
+    }
+    
+    const titleLower = title.toLowerCase();
+    if (titleLower.includes('game') || titleLower.includes('roblox')) return 'game';
+    if (titleLower.includes('web') || titleLower.includes('site')) return 'web';
+    if (titleLower.includes('app')) return 'app';
+    
+    return 'default';
+},
+    drawProjectIcon(ctx, type, x, y) {
+        ctx.save();
+        ctx.shadowColor = 'rgba(0, 0, 0, 0)';
+        ctx.fillStyle = 'white';
+        ctx.textAlign = 'center';
+        
+        switch(type) {
+            case 'game':
+                ctx.font = '24px serif';
+                ctx.fillText('🎮', x, y);
+                break;
+            case 'web':
+                ctx.font = '24px serif';
+                ctx.fillText('🌐', x, y);
+                break;
+            case 'app':
+                ctx.font = '24px serif';
+                ctx.fillText('📱', x, y);
+                break;
+            case 'design':
+                ctx.font = '24px serif';
+                ctx.fillText('🎨', x, y);
+                break;
+            default:
+                ctx.font = '24px serif';
+                ctx.fillText('💡', x, y);
+        }
+        ctx.restore();
     },
     
     hslToHex(h, s, l) {
