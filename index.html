@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="/src/javascript/misc.js"></script>
+    <script src="/src/javascript/responsive.js"></script>
 
+    <link rel="stylesheet" href="/src/css/responsive.css">
     <link rel="stylesheet" href="/src/css/global.css">
     <link rel="stylesheet" href="/src/css/home.css">
     <link rel="stylesheet" href="/src//css/projects.css">
@@ -25,6 +27,16 @@
                 <div class="left">
                     <a href="/" id="bexxi" data-page="home"><span class="rainbow-glo">Bexxi</span><span class="dotdev" id="dotdev"></span></a>
                 </div>
+
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <svg class="hamburger-icon" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="close-icon" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="menu-overlay"></div>
 
                 <div class="right">
                     <div class="theme-btn" id="theme-btn"></div>
