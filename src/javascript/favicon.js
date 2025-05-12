@@ -10,7 +10,6 @@
             canvas.width = size;
             canvas.height = size;
             
-            // Create rounded corners
             ctx.beginPath();
             ctx.arc(radius, radius, radius, Math.PI, 1.5 * Math.PI);
             ctx.lineTo(size - radius, 0);
@@ -32,13 +31,12 @@
                 console.log('Primary favicon failed to load, trying fallback...');
                 setFavicon(fallbackSrc, fallbackSrc, radius);
             } else {
-                console.log('Both primary and fallback favicons failed to load');
+                console.log('Both primary and fallback favicons failed to load.');
             }
         };
         image.src = src;
     }
     
-    // Create favicon link element if it doesn't exist
     let favicon = document.getElementById('favicon');
     if (!favicon) {
         favicon = document.createElement('link');

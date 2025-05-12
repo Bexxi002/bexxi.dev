@@ -136,6 +136,7 @@
 .accounts-account:hover {
     cursor: pointer;
     transform: translateY(-4px);
+    border: 1px solid var(--border-strong);
 }
 .accounts-account--icon svg {
     display: block;
@@ -195,6 +196,7 @@
 .recent-activity-container:hover {
     cursor: pointer;
     transform: translateY(-4px);
+    border: 2px solid var(--border-strong);
 }
 .recent-activity-container img {
     min-width: 80px;

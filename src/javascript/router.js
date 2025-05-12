@@ -41,7 +41,7 @@ function navigateTo(urlPath, shouldPush = true) {
           <a href="/" data-page="home" class="rainbow-hover" data-text="Return Home">Return Home</a>
       </div>
       `;
-      document.title = "Error - Bexxi.dev";
+      document.title = "404! - Bexxi.dev";
       if (shouldPush) {
         history.pushState({}, "", "/404");
       }

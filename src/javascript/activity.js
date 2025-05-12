@@ -202,16 +202,13 @@ async function updateActivities(forceRefresh = false) {
         if (!forceRefresh) {
             const cachedActivities = getActivitiesFromCache();
             if (cachedActivities && cachedActivities.length > 0) {
-                console.log('Using cached GitHub activities');
                 return cachedActivities;
             }
         }
 
-        console.log('Fetching fresh GitHub activities');
         const githubEvents = await fetchGitHubActivity();
         
         if (!githubEvents || githubEvents.length === 0) {
-            console.log('No GitHub events found, using fallback');
             return getFallbackActivities();
         }
         
@@ -226,7 +223,6 @@ async function updateActivities(forceRefresh = false) {
         
         const cachedActivities = getActivitiesFromCache();
         if (cachedActivities && cachedActivities.length > 0) {
-            console.log('API failed, using cached activities');
             return cachedActivities;
         }
         
@@ -234,19 +230,26 @@ async function updateActivities(forceRefresh = false) {
     }
 }
 
-async function main(forceRefresh = false) {
-    const footer = document.querySelector('footer');
-
-    const container = document.getElementById('recent-activity-container-of-container');
-    if (!container) return;
+const ActivitiesManager = {
+    initialized: false,
     
-    const skeletonContainers = container.querySelectorAll('.skeleton-container');
-    skeletonContainers.forEach(skeleton => {
-        skeleton.style.display = 'flex';
-    });
+    isHomePage() {
+        const container = document.getElementById('recent-activity-container-of-container');
+        if (container) return true;
+        
+        if (window.location.pathname === '/' || 
+            window.location.pathname === '/home' || 
+            window.location.hash === '#home') {
+            return true;
+        }
+        
+        return false;
+    },
     
-    try {
-        const activities = await updateActivities(forceRefresh);
+    async renderActivities(activities) {
+        const footer = document.querySelector('footer');
+        const container = document.getElementById('recent-activity-container-of-container');
+        if (!container) return false;
         
         container.innerHTML = '';
 
@@ -254,8 +257,8 @@ async function main(forceRefresh = false) {
             container.innerHTML = `
                 <p>0.o</p>
             `;
-            footer.style.opacity = "1";
-            return;
+            if (footer) footer.style.opacity = "1";
+            return true;
         }
 
         activities.forEach(activity => {
@@ -300,73 +303,143 @@ async function main(forceRefresh = false) {
             activityDiv.appendChild(timeDiv);
             container.appendChild(activityDiv);
         });
-        footer.style.opacity = "1";
-    } catch (error) {
-        footer.style.opacity = "1";
-        console.error("Failed to load GitHub activities:", error);
-
-        container.innerHTML = '';
-        const fallbackActivities = getFallbackActivities();
         
-        fallbackActivities.forEach(activity => {
-            const activityDiv = document.createElement('a');
-            activityDiv.classList.add('recent-activity-container');
-            
-            if (activity.link) {
-                activityDiv.href = activity.link;
-                activityDiv.target = "_blank";
-                activityDiv.rel = "noopener noreferrer";
-            }
-            
-            const thumbnailDiv = document.createElement('div');
-            thumbnailDiv.classList.add('recent-activity-container-thumbnail');
-            const thumbnailImg = document.createElement('img');
-            thumbnailImg.src = activity.thumbnail;
-            thumbnailImg.alt = 'GitHub Avatar';
-            thumbnailDiv.appendChild(thumbnailImg);
-            
-            const activityContentDiv = document.createElement('div');
-            activityContentDiv.classList.add('recent-activity-container--container');
-            
-            const titleDiv = document.createElement('div');
-            titleDiv.classList.add('recent-activity-container-container--title');
-            titleDiv.innerHTML = `<span>${activity.title}</span>`;
-            
-            const descriptionDiv = document.createElement('div');
-            descriptionDiv.classList.add('recent-activity-container-container--description');
-            descriptionDiv.innerHTML = `<span>${activity.description}</span>`;
-            
-            const timeDiv = document.createElement('div');
-            timeDiv.classList.add('recent-activity-container-container--time');
-            timeDiv.innerHTML = `<span>${activity.time}</span>`;
-            
-            activityContentDiv.appendChild(titleDiv);
-            activityContentDiv.appendChild(descriptionDiv);
-            activityDiv.appendChild(thumbnailDiv);
-            activityDiv.appendChild(activityContentDiv);
-            activityDiv.appendChild(timeDiv);
-            container.appendChild(activityDiv);
+        if (footer) footer.style.opacity = "1";
+        return true;
+    },
+    
+    showSkeletonUI() {
+        const container = document.getElementById('recent-activity-container-of-container');
+        if (!container) return false;
+        
+        const skeletonContainers = container.querySelectorAll('.skeleton-container');
+        skeletonContainers.forEach(skeleton => {
+            skeleton.style.display = 'flex';
         });
+        
+        return true;
+    },
+    
+    async initialize(forceRefresh = false) {
+        if (!this.isHomePage()) return;
+        
+        if (this.initialized && !forceRefresh) return;
+        
+        this.showSkeletonUI();
+        
+        try {
+            const activities = await updateActivities(forceRefresh);
+            await this.renderActivities(activities);
+            this.initialized = true;
+        } catch (error) {
+            console.error("Failed to initialize activities:", error);
+            const fallbackActivities = getFallbackActivities();
+            await this.renderActivities(fallbackActivities);
+        }
+    },
+    
+    reset() {
+        this.initialized = false;
     }
+};
+
+const originalNavigateTo = window.navigateTo;
+
+if (typeof originalNavigateTo === 'function') {
+    window.navigateTo = function(urlPath, shouldPush = true) {
+        originalNavigateTo(urlPath, shouldPush);
+        
+        if (urlPath === '/' || urlPath === '/home') {
+            setTimeout(() => {
+                const lastRefresh = parseInt(localStorage.getItem('github_last_refresh') || '0');
+                const now = new Date().getTime();
+                
+                const forceRefresh = now - lastRefresh > 15 * 60 * 1000;
+                
+                if (forceRefresh) {
+                    ActivitiesManager.reset();
+                    ActivitiesManager.initialize(true);
+                    localStorage.setItem('github_last_refresh', now.toString());
+                } else {
+                    ActivitiesManager.initialize(false);
+                }
+            }, 100);
+        }
+    };
 }
 
 document.addEventListener("page:home-loaded", () => {
-    main(true);
+    const lastRefresh = parseInt(localStorage.getItem('github_last_refresh') || '0');
+    const now = new Date().getTime();
+    
+    const forceRefresh = now - lastRefresh > 15 * 60 * 1000;
+    
+    ActivitiesManager.reset();
+    ActivitiesManager.initialize(forceRefresh);
+    
+    if (forceRefresh) {
+        localStorage.setItem('github_last_refresh', now.toString());
+    }
 });
 
 document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") {
+    if (document.visibilityState === "visible" && ActivitiesManager.isHomePage()) {
         const lastRefresh = parseInt(localStorage.getItem('github_last_refresh') || '0');
         const now = new Date().getTime();
         
-        if (now - lastRefresh > 15 * 60 * 1000) { // 15 minutes
-            main(true);
+        if (now - lastRefresh > 15 * 60 * 1000) {
+            ActivitiesManager.initialize(true);
+            localStorage.setItem('github_last_refresh', now.toString());
+        }
+    }
+});
+
+const contentObserver = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+        if (mutation.type === 'childList') {
+            const activitiesContainer = document.getElementById('recent-activity-container-of-container');
+            if (activitiesContainer && !ActivitiesManager.initialized && ActivitiesManager.isHomePage()) {
+                const lastRefresh = parseInt(localStorage.getItem('github_last_refresh') || '0');
+                const now = new Date().getTime();
+                
+                const forceRefresh = now - lastRefresh > 15 * 60 * 1000;
+                
+                ActivitiesManager.initialize(forceRefresh);
+                
+                if (forceRefresh) {
+                    localStorage.setItem('github_last_refresh', now.toString());
+                }
+                
+                break;
+            }
+        }
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const contentElement = document.getElementById('content');
+    if (contentElement) {
+        contentObserver.observe(contentElement, { childList: true, subtree: true });
+    }
+    
+    if (ActivitiesManager.isHomePage()) {
+        const lastRefresh = parseInt(localStorage.getItem('github_last_refresh') || '0');
+        const now = new Date().getTime();
+        
+        const forceRefresh = now - lastRefresh > 15 * 60 * 1000;
+        
+        ActivitiesManager.initialize(forceRefresh);
+        
+        if (forceRefresh) {
+            localStorage.setItem('github_last_refresh', now.toString());
         }
     }
 });
 
 // Periodic refresh (every 15 minutes)
 setInterval(() => {
-    main(true);
-    localStorage.setItem('github_last_refresh', new Date().getTime().toString());
+    if (ActivitiesManager.isHomePage()) {
+        ActivitiesManager.initialize(true);
+        localStorage.setItem('github_last_refresh', new Date().getTime().toString());
+    }
 }, 900000);
