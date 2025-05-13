@@ -221,6 +221,7 @@
     font-weight: bold;
 }
 .recent-activity-container-container--description {
+    color: var(--secondary-text);
     font-size: var(--font-300);
     width: 66%;
 }

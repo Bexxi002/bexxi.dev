@@ -1,3 +1,12 @@
+/* TODO:
+
++ Add variables for padding and margin values.
+
++ Improve accessability & responsive layout.
+
+*/
+
+
 :root[data-theme="dark"] {
     --text: #dee9fc;
     --secondary-text: #dee9fc80; /* 50% opacity */
