@@ -46,7 +46,7 @@
         document.head.appendChild(favicon);
     }
 
-    const discordAvatarUrl = 'https://cdn.discordapp.com/avatars/1058244018770817095/5b1290324bfc841be5663f4e0c97ec33?size=1024';
+    const discordAvatarUrl = 'https://cdn.discordapp.com/avatars/1058244018770817095/9c3a6dac3485d9c0ca653ce717367775?size=1024';
     const githubAvatarUrl = 'https://avatars.githubusercontent.com/u/207246128';
     
     setFavicon(discordAvatarUrl, githubAvatarUrl, 8);
