@@ -1,22 +1,22 @@
 .page-title {
     font-size: var(--font-700);
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-600);
     text-align: center;
     font-weight: 600;
 }
 .projects-filter {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 2rem;
+    gap: var(--space-300);
+    margin-bottom: var(--space-700);
     flex-wrap: wrap;
 }
 .filter-btn {
     background-color: var(--secondary-background);
     border: 1px solid var(--border);
     color: var(--text);
-    padding: 8px 16px;
-    border-radius: 8px;
+    padding: var(--space-200) var(--space-400);
+    border-radius: var(--space-200);
     font-family: 'JetBrains Mono', monospace;
     cursor: pointer;
     transition: 0.15s ease;
@@ -24,41 +24,41 @@
 .filter-btn:hover, .filter-btn.active {
     background-color: var(--primary);
     color: var(--secondary-background);
-    transform: translateY(-2px);
+    transform: translateY(calc(-1 * var(--space-50)));
 }
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
+    gap: var(--space-600);
     width: 100%;
     max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 16px;
+    margin: var(--space-0) auto;
+    padding: var(--space-0) var(--space-400);
 }
 .project-card {
     background-color: var(--secondary-background);
-    border: 2px solid var(--border);
-    border-radius: 10px;
+    border: var(--space-50) solid var(--border);
+    border-radius: var(--space-250);
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 var(--space-100) var(--space-300) rgba(0, 0, 0, 0.1);
     transition: 0.15s ease;
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 .project-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(calc(-1 * var(--space-200)));
     border-color: var(--border-strong);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 var(--space-200) var(--space-600) rgba(0, 0, 0, 0.15);
 }
 .project-image {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    border-bottom: 2px solid var(--border);
+    border-bottom: var(--space-50) solid var(--border);
 }
 .project-content {
-    padding: 16px;
+    padding: var(--space-400);
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -66,26 +66,26 @@
 .project-title {
     font-size: var(--font-500);
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: var(--space-200);
     color: var(--text);
 }
 .project-description {
     font-size: var(--font-300);
     color: var(--secondary-text);
-    margin-bottom: 16px;
+    margin-bottom: var(--space-400);
     flex: 1;
 }
 .project-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 16px;
+    gap: var(--space-200);
+    margin-bottom: var(--space-400);
 }
 .project-tag {
     background-color: rgba(0, 0, 0, 0.1);
     border: 1px solid var(--border);
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: var(--space-100) var(--space-200);
+    border-radius: var(--space-100);
     font-size: var(--font-200);
     color: var(--secondary-text);
 }
@@ -96,61 +96,61 @@
     display: flex;
     justify-content: space-between;
     border-top: 1px dashed var(--border);
-    padding-top: 12px;
+    padding-top: var(--space-300);
 }
 .project-link {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--space-150);
     font-size: var(--font-300);
     color: var(--primary);
     transition: 0.15s ease;
 }
 .project-link:hover {
     color: var(--accent);
-    transform: translateY(-2px);
+    transform: translateY(calc(-1 * var(--space-50)));
 }
 .skeleton-project-card {
     background-color: var(--secondary-background);
-    border: 2px solid var(--border);
-    border-radius: 10px;
+    border: var(--space-50) solid var(--border);
+    border-radius: var(--space-250);
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 var(--space-100) var(--space-300) rgba(0, 0, 0, 0.1);
     height: 100%;
 }
 .skeleton-image {
     width: 100%;
     height: 180px;
-    border-bottom: 2px solid var(--border);
+    border-bottom: var(--space-50) solid var(--border);
 }
 .skeleton-content {
-    padding: 16px;
+    padding: var(--space-400);
 }
 .skeleton-description-2 {
     height: 18px;
     width: 90%;
-    margin-bottom: 16px;
+    margin-bottom: var(--space-400);
 }
 .skeleton-tags {
     display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
+    gap: var(--space-200);
+    margin-bottom: var(--space-400);
 }
 .skeleton-tag {
     height: 20px;
     width: 60px;
-    border-radius: 4px;
+    border-radius: var(--space-100);
 }
 .skeleton-links {
     display: flex;
     justify-content: space-between;
     border-top: 1px dashed var(--border);
-    padding-top: 12px;
+    padding-top: var(--space-300);
 }
 .skeleton-link {
     height: 18px;
     width: 80px;
 }
 p, h3 {
-    margin: 0;
+    margin: var(--space-0);
 }

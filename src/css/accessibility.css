@@ -1,0 +1,116 @@
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .glow,
+    .blink,
+    .skeleton-loading {
+        animation: none !important;
+    }
+    .project-card:hover,
+    .accounts-account:hover,
+    .filter-btn:hover,
+    .tag:hover,
+    .project-link:hover,
+    .contact-form button:hover,
+    .recent-activity-container:hover {
+        transform: none !important;
+    }
+}
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background-color: var(--primary);
+    color: var(--secondary-background);
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 10000;
+    font-weight: 600;
+    transition: top 0.3s ease;
+}
+.skip-link:focus {
+    top: 6px;
+}
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible,
+[role="link"]:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+[tabindex]:focus:not(:focus-visible) {
+    outline: none;
+}
+.filter-btn:focus-visible,
+.project-card:focus-visible,
+.accounts-account:focus-visible,
+.tag:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(166, 195, 242, 0.3);
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+.sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+@media (prefers-contrast: high) {
+    :root[data-theme="dark"] {
+        --border: #4a5568;
+        --border-strong: #718096;
+        --text: #ffffff;
+        --background: #000000;
+    }
+    :root[data-theme="light"] {
+        --border: #2d3748;
+        --border-strong: #1a202c;
+        --text: #000000;
+        --background: #ffffff;
+    }
+    .project-card,
+    .profile,
+    .accounts-account,
+    .contact-form,
+    .filter-btn {
+        border-width: 3px;
+    }
+}
+[aria-busy="true"] {
+    cursor: wait;
+}
+.announcement {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

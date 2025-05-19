@@ -1,12 +1,3 @@
-/* TODO:
-
-+ Add variables for padding and margin values.
-
-+ Improve accessability & responsive layout.
-
-*/
-
-
 :root[data-theme="dark"] {
     --text: #dee9fc;
     --secondary-text: #dee9fc80; /* 50% opacity */
@@ -32,6 +23,7 @@
     --secondary-background: #c5d4e8;
 }
 :root {
+    /* Font sizes */
     --font-100: 0.625rem;   /* 10px */
     --font-200: 0.75rem;    /* 12px */
     --font-300: 0.875rem;   /* 14px */
@@ -40,9 +32,71 @@
     --font-600: 1.5rem;     /* 24px */
     --font-700: 2rem;       /* 32px */
     --font-800: 3rem;       /* 48px */
+    
+    /* Spacing values */
+    --space-0: 0;           /* 0px */
+    --space-50: 0.125rem;   /* 2px */
+    --space-100: 0.25rem;   /* 4px */
+    --space-150: 0.3125rem; /* 5px */
+    --space-200: 0.5rem;    /* 8px */
+    --space-250: 0.625rem;  /* 10px */
+    --space-300: 0.75rem;   /* 12px */
+    --space-350: 0.875rem;  /* 14px */
+    --space-400: 1rem;      /* 16px */
+    --space-450: 1.125rem;  /* 18px */
+    --space-500: 1.25rem;   /* 20px */
+    --space-600: 1.5rem;    /* 24px */
+    --space-700: 2rem;      /* 32px */
+    --space-800: 2.5rem;    /* 40px */
+    --space-900: 3rem;      /* 48px */
+    --space-1000: 5rem;     /* 80px */
 }
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+    width: var(--space-300);
+    height: var(--space-300);
+}
+::-webkit-scrollbar-track {
+    background: var(--background);
+    border-radius: var(--space-150);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: var(--space-150);
+    border: var(--space-50) solid var(--background);
+    transition: all 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+::-webkit-scrollbar-thumb:active {
+    background: var(--accent);
+}
+::-webkit-scrollbar-corner {
+    background: var(--background);
+}
+
+/* Firefox scrollbar */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) var(--background);
+}
+
+/* Custom text selection */
+::selection {
+    background-color: var(--primary);
+    color: var(--secondary-background);
+    text-shadow: none;
+}
+::-moz-selection {
+    background-color: var(--primary);
+    color: var(--secondary-background);
+    text-shadow: none;
+}
+
 html, body {
-    margin: 0;
+    margin: var(--space-0);
     height: 100%;
     background-color: var(--background);
     color: var(--text);
@@ -61,7 +115,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2.5rem 0;
+    padding: var(--space-800) var(--space-0);
     width: 100%;
     max-width: 1280px;
     margin-left: auto;
@@ -87,7 +141,7 @@ header {
 header nav {
     width: 100%;
     max-width: 1200px;
-    padding: 0 20px;
+    padding: var(--space-0) var(--space-500);
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -97,11 +151,24 @@ header nav {
 header nav a:hover {
     color: var(--text);
     transform: scale(1.25);
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: var(--space-250);
+    margin-right: var(--space-250);
+}
+@media (hover: none), (pointer: coarse), (max-width: 1024px) {
+    header nav a#bexxi {
+        transition: none !important;
+    }
+    header nav a#bexxi:hover {
+        transform: none !important;
+        margin: var(--space-0) !important;
+    }
+    header nav a#bexxi:active {
+        transform: none !important;
+        margin: var(--space-0) !important;
+    }
 }
 #farmost-left:hover {
-    margin-right: 0 !important;
+    margin-right: var(--space-0) !important;
 }
 .left {
     margin-right: auto;
@@ -115,22 +182,22 @@ header nav a:hover {
     font-size: var(--font-500);
     color: var(--text);
     text-shadow: 
-        0 0 2px #ff005e, 
-        0 0 4px #ff005e, 
-        0 0 6px #ff005e;
+        0 0 var(--space-50) #ff005e, 
+        0 0 var(--space-100) #ff005e, 
+        0 0 var(--space-150) #ff005e;
     animation: glow 1.5s infinite alternate;
 }
 @keyframes glow {
     0% {
         text-shadow: 
-            0 0 2px #ff005e, 
-            0 0 4px #ff005e, 
-            0 0 6px #ff005e;
+            0 0 var(--space-50) #ff005e, 
+            0 0 var(--space-100) #ff005e, 
+            0 0 var(--space-150) #ff005e;
     }
     100% {
         text-shadow: 
             0 0 3px #00d4ff, 
-            0 0 5px #00d4ff, 
+            0 0 var(--space-150) #00d4ff, 
             0 0 7px #00d4ff;
     }
 }
@@ -141,13 +208,15 @@ header nav a:hover {
 .rainbow-hover::after {
     content: attr(data-text);
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: var(--space-0); 
+    left: var(--space-0);
+    width: 100%; 
+    height: 100%;
     pointer-events: none;
     text-shadow: 
-        0 0 2px #ff005e,
-        0 0 4px #ff005e,
-        0 0 6px #ff005e;
+        0 0 var(--space-50) #ff005e,
+        0 0 var(--space-100) #ff005e,
+        0 0 var(--space-150) #ff005e;
     animation: glow 1.5s infinite alternate;
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -158,8 +227,8 @@ header nav a:hover {
 }
 .confetti-canvas {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: var(--space-0);
+    left: var(--space-0);
     pointer-events: none;
     z-index: 9999;
 }
@@ -173,7 +242,7 @@ header nav a:hover {
     content: '|';
     animation: blink 1s step-start infinite;
     color: var(--text);
-    margin: -2px;
+    margin: -var(--space-50);
 }
 @keyframes blink {
     50% { opacity: 0; }
@@ -189,49 +258,48 @@ header nav a:hover {
 /* FOOTER */
 footer {
     background-color: var(--secondary-background);
-    border: 2px solid var(--border);
+    border: var(--space-50) solid var(--border);
     width: 100%;
-    padding: 2.5rem 0rem;
+    padding: var(--space-800) var(--space-0);
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    bottom: 0;
+    bottom: var(--space-0);
     flex-direction: column;
     opacity: 0;
 }
 .container {
     width: 100%;
     max-width: 1280px;
-    padding-right: 2.5rem;
-    padding-left: 2.5rem;
+    padding-right: var(--space-800);
+    padding-left: var(--space-800);
     margin-right: auto;
     margin-left: auto;
     display: flex;
     flex-direction: row;
-    gap: 2.5rem;
-    
+    gap: var(--space-800);
 }
 .footer-column {
     width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 5rem;
+    gap: var(--space-1000);
 }
 .footer-column--lg {
     width: 30%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: var(--space-150);
     align-items: center;
 }
 .footer-column--lg #pfp {
-    border: 2px solid var(--border-strong);
+    border: var(--space-50) solid var(--border-strong);
     min-width: 80px;
     min-height: 80px;
     max-width: 80px;
     max-height: 80px;
-    border-radius: 12px;
+    border-radius: var(--space-300);
 }
 .footer-column--list {
     font-size: .75rem;
@@ -245,7 +313,7 @@ footer {
     color: var(--text);
     font-size: var(--font-400);
     list-style: none;
-    margin-bottom: 5px;
+    margin-bottom: var(--space-150);
     font-weight: bold;
 }
 .footer-columb--list-item {
@@ -258,7 +326,7 @@ footer {
     width: 100%;
     text-align: center;
     font-size: var(--font-200);
-    padding-top: 1rem;
+    padding-top: var(--space-400);
     color: var(--text);
 }
 .footer-c .rainbow-glo {
@@ -266,11 +334,11 @@ footer {
 }
 .footer-site-stats {
     font-size: var(--font-200);
-    margin-top: 2.5rem;
-    margin-bottom: -1rem;
+    margin-top: var(--space-800);
+    margin-bottom: -var(--space-400);
 }
 .footer-site-stats p {
-    margin: 0;
+    margin: var(--space-0);
 }
 .footer-site-stats .rainbow-glo {
     font-size: var(--font-200);
@@ -284,34 +352,34 @@ footer {
     text-align: center;
 }
 .four0four a {
-    margin-top: 1rem;
+    margin-top: var(--space-400);
     text-decoration: underline;
 }
 
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    margin-top: 20px;
+    gap: var(--space-400);
+    margin-top: var(--space-500);
     background-color: var(--secondary-background);
-    border: 2px solid var(--border);
-    padding: 24px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: var(--space-50) solid var(--border);
+    padding: var(--space-600);
+    border-radius: var(--space-250);
+    box-shadow: 0 var(--space-100) var(--space-300) rgba(0, 0, 0, 0.1);
 }
 .contact-form label {
     color: var(--text);
     font-size: var(--font-300);
     font-weight: 500;
-    margin-bottom: 5px;
+    margin-bottom: var(--space-150);
     display: block;
 }
 .contact-form input,
 .contact-form textarea {
     background-color: rgba(0, 0, 0, 0.1);
     border: 1px solid var(--border-strong);
-    border-radius: 8px;
-    padding: 12px 16px;
+    border-radius: var(--space-200);
+    padding: var(--space-300) var(--space-400);
     font-family: 'JetBrains Mono', monospace;
     font-size: var(--font-300);
     color: var(--text);
@@ -320,11 +388,16 @@ footer {
     width: 100%;
     box-sizing: border-box;
 }
+.contact-form input:hover,
+.contact-form textarea:hover {
+    border-color: var(--accent);
+    transform: translateY(calc(-1 * var(--space-50)));
+}
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
     border-color: var(--accent);
-    transform: translateY(-2px);
+    transform: translateY(calc(-1 * var(--space-50)));
 }
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
@@ -337,17 +410,17 @@ footer {
     font-family: 'JetBrains Mono', monospace;
     font-size: var(--font-300);
     font-weight: 600;
-    padding: 12px 24px;
+    padding: var(--space-300) var(--space-600);
     border: none;
-    border-radius: 8px;
+    border-radius: var(--space-200);
     cursor: pointer;
     transition: 0.15s ease;
     align-self: flex-start;
-    margin-top: 8px;
+    margin-top: var(--space-200);
 }
 .contact-form button:hover {
     background-color: var(--accent);
-    transform: translateY(-2px);
+    transform: translateY(calc(-1 * var(--space-50)));
 }
 .form-field {
     display: flex;

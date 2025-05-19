@@ -3,7 +3,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 5px;
+    padding: var(--space-150);
     color: var(--text);
     z-index: 101;
     transition: transform 0.2s ease;
@@ -21,8 +21,8 @@
 }
 .mobile-menu-btn .close-icon {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: var(--space-150);
+    left: var(--space-150);
     opacity: 0;
     transform: rotate(-90deg);
 }
@@ -37,10 +37,10 @@
 .menu-overlay {
     visibility: hidden;
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: var(--space-0);
+    left: var(--space-0);
+    right: var(--space-0);
+    bottom: var(--space-0);
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 90;
     opacity: 0;
@@ -58,7 +58,7 @@
 @media (max-width: 768px) {
     header nav {
         width: 100%;
-        padding: 0 20px;
+        padding: var(--space-0) var(--space-500);
         position: relative;
     }
     .mobile-menu-btn {
@@ -70,34 +70,34 @@
     }
     .right {
         position: fixed;
-        left: 0;
-        right: 0;
+        left: var(--space-0);
+        right: var(--space-0);
         background-color: var(--secondary-background);
-        border-bottom: 2px solid var(--border);
+        border-bottom: var(--space-50) solid var(--border);
         flex-direction: column;
         align-items: center;
-        padding: 20px;
-        gap: 20px;
+        padding: var(--space-500);
+        gap: var(--space-500);
         transform: translateY(-100%);
         transition: transform 0.3s ease;
         z-index: 100;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 var(--space-100) var(--space-250) rgba(0, 0, 0, 0.1);
     }
     .right.active {
         transform: translateY(0);
-        top: 0 !important; /* -1.25rem */
+        top: var(--space-0) !important;
     }
     header nav a:hover {
         transform: scale(1.1);
-        margin: 0 !important;
+        margin: var(--space-0) !important;
     }
     #farmost-left:hover {
-        margin: 0 !important;
+        margin: var(--space-0) !important;
     }
 }
 @media (max-width: 576px) {
     header nav {
-        padding: 0 15px !important;
+        padding: var(--space-0) var(--space-400) !important;
     }
 }
 
@@ -116,29 +116,29 @@
         width: fit-content !important;
     }
     ul {
-        padding-inline-start: 0 !important;
-        margin-left: 0 !important;
+        padding-inline-start: var(--space-0) !important;
+        margin-left: var(--space-0) !important;
     }
 }
 @media (max-width: 768px) {
     .footer-column {
         flex-direction: column !important;
-        gap: 1rem !important;
+        gap: var(--space-400) !important;
         align-items: center !important;
     }
     ul {
         text-align: center !important;
-        margin-left: 0 !important;
+        margin-left: var(--space-0) !important;
     }
 }
 @media (max-width: 576px) {
     footer .container {
-        padding: 0 !important;
-        margin: 0 !important;
+        padding: var(--space-0) !important;
+        margin: var(--space-0) !important;
     }
     .footer-site-stats {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
+        padding-left: var(--space-400) !important;
+        padding-right: var(--space-400) !important;
     }
 }
 @media (max-width: 375px) {
@@ -166,17 +166,17 @@
     .profile {
         flex-direction: column !important;
         width: 85% !important;
-        padding: 18px !important;
+        padding: var(--space-450) !important;
     }
     .profile-right {
         align-items: center !important;
-        margin-top: -.5rem !important;
+        margin-top: calc(-1 * var(--space-200)) !important;
     }
     .profile-left {
         width: 100% !important;
     }
     .profile-extra {
-        width: calc(100% - 32px) !important;
+        width: calc(100% - var(--space-700)) !important;
     }
     .profile-tags {
         justify-content: center !important;
@@ -187,9 +187,12 @@
         align-items: center !important;
         text-align: center !important;
     }
+    .recent-activity-container-thumbnail {
+        display: none !important;
+    }
     .recent-activity-container-thumbnail img {
-        margin-right: 0 !important;
-        margin-bottom: .5rem !important;
+        margin-right: var(--space-0) !important;
+        margin-bottom: var(--space-200) !important;
         min-width: 64px !important;
         min-height: 64px !important;
         max-width: 64px !important;
@@ -203,13 +206,13 @@
         width: 100% !important;
     }
     .recent-activity-container-container--time {
-        margin-left: 0 !important;
-        margin-top: .5rem !important;
+        margin-left: var(--space-0) !important;
+        margin-top: var(--space-200) !important;
     }
     .accounts {
         display: flex !important;
         flex-wrap: wrap !important;
-        gap: .5rem !important;
+        gap: var(--space-200) !important;
         justify-content: center !important;
     }
 }
@@ -221,15 +224,15 @@
     .profile {
         flex-direction: column !important;
         width: 85% !important;
-        padding: 18px !important;
+        padding: var(--space-450) !important;
     }
     .recent-activity-container {
-        padding: 14px !important;
+        padding: var(--space-350) !important;
     }
     .accounts {
         display: flex !important;
         flex-wrap: wrap !important;
-        gap: .5rem !important;
+        gap: var(--space-200) !important;
         justify-content: center !important;
     }
 }
@@ -239,50 +242,50 @@
     .projects-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
         max-width: 900px !important;
-        gap: 20px !important;
+        gap: var(--space-500) !important;
     }
     .project-image {
         height: 160px !important;
     }
     .project-content {
-        padding: 14px !important;
+        padding: var(--space-350) !important;
     }
     .skeleton-image {
         height: 160px !important;
     }
     .skeleton-content {
-        padding: 14px !important;
+        padding: var(--space-350) !important;
     }
 }
 @media (max-width: 768px) {
     .projects-grid {
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
         max-width: 90% !important;
-        gap: 16px !important;
-        padding: 0 !important;
+        gap: var(--space-400) !important;
+        padding: var(--space-0) !important;
     }
     .project-card:hover {
-        transform: translateY(-5px) !important;
+        transform: translateY(calc(-1 * var(--space-150))) !important;
     }
     .project-image {
         height: 140px !important;
     }
     .project-tags {
-        gap: 6px !important;
-        margin-bottom: 12px !important;
+        gap: var(--space-150) !important;
+        margin-bottom: var(--space-300) !important;
     }
     .project-tag {
-        padding: 3px 6px !important;
+        padding: 3px var(--space-150) !important;
     }
     .project-links {
-        padding-top: 10px !important;
+        padding-top: var(--space-250) !important;
     }
     .skeleton-image {
         height: 140px !important;
     }
     .skeleton-tags {
-        gap: 6px !important;
-        margin-bottom: 12px !important;
+        gap: var(--space-150) !important;
+        margin-bottom: var(--space-300) !important;
     }
 }
 @media (max-width: 576px) {
@@ -313,11 +316,11 @@
         height: 180px !important;
     }
     .skeleton-title {
-        margin: 0 auto !important;
+        margin: var(--space-0) auto !important;
     }
     .skeleton-description,
     .skeleton-description-2 {
-        margin: 8px auto !important;
+        margin: var(--space-200) auto !important;
     }
     .skeleton-tags {
         justify-content: center !important;
@@ -326,38 +329,38 @@
 @media (max-width: 375px) {
     .projects-grid {
         max-width: 90% !important;
-        gap: 14px !important;
+        gap: var(--space-350) !important;
     }
     .project-image {
         height: 150px !important;
     }
     .project-content {
-        padding: 12px !important;
+        padding: var(--space-300) !important;
     }
     .project-title {
-        margin-bottom: 6px !important;
+        margin-bottom: var(--space-150) !important;
     }
     .project-description {
-        margin-bottom: 12px !important;
+        margin-bottom: var(--space-300) !important;
         font-size: var(--font-200) !important;
     }
     .project-tag {
-        padding: 2px 6px !important;
+        padding: var(--space-50) var(--space-150) !important;
     }
     .project-links {
         flex-direction: column !important;
-        gap: 10px !important;
+        gap: var(--space-250) !important;
         align-items: center !important;
     }
     .skeleton-image {
         height: 150px !important;
     }
     .skeleton-content {
-        padding: 12px !important;
+        padding: var(--space-300) !important;
     }
     .skeleton-links {
         flex-direction: column !important;
-        gap: 10px !important;
+        gap: var(--space-250) !important;
         align-items: center !important;
     }
 }

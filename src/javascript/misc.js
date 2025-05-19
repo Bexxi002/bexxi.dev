@@ -1,18 +1,31 @@
 // Set theme based on system preferences
 (function () {
+    const themeColorMeta = document.getElementById('theme-color-meta');
+    
+    const themeColors = {
+        dark: '#0d1b2b',
+        light: '#d4e2f2'
+    };
+    
+    function updateThemeColor(theme) {
+        if (themeColorMeta) {
+            themeColorMeta.content = themeColors[theme];
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+    
     const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
-    document.documentElement.setAttribute('data-theme', systemPreference);
+    updateThemeColor(systemPreference);
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        updateThemeColor(e.matches ? 'dark' : 'light');
     });
 })();
 
 //---------------------------------------------------------------------
 // Site configuration
 const siteConfig = {
-    version: '1.0',
+    version: '0.9.0-beta',
     githubRepo: 'bexxi002/bexxi.dev'
 };
 
@@ -74,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error fetching commit info:', error);
-                commitHashElement.textContent = '0.o';
+                commitHashElement.textContent = '-';
             });
     }
 });

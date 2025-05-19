@@ -3,22 +3,46 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" id="theme-color-meta" />
 
+    <link rel="preload" href="/src/css/global.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <noscript>
+        <link rel="stylesheet" href="/src/css/global.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap">
+    </noscript>
+    
+    <link rel="stylesheet" href="/src/css/responsive.css"onload="this.media='all'">
+    <link rel="stylesheet" href="/src/css/home.css" onload="this.media='all'">
+    <link rel="stylesheet" href="/src/css/projects.css" onload="this.media='all'">
+    <link rel="stylesheet" href="/src/css/accessibility.css" onload="this.media='all'">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <script src="/src/javascript/misc.js"></script>
     <script src="/src/javascript/responsive.js"></script>
 
-    <link rel="stylesheet" href="/src/css/responsive.css">
-    <link rel="stylesheet" href="/src/css/global.css">
-    <link rel="stylesheet" href="/src/css/home.css">
-    <link rel="stylesheet" href="/src//css/projects.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <script src="/src/javascript/favicon.js" defer></script>
     
     <title id="dynamic-title">Bexxi.dev</title>
+    <meta name="description" content="Hey, I'm Bexxi! I'm a web developer from the USA. Come explore my little corner of the internet!">
     <link id="favicon" rel="icon" href="" type="image/gif"></link>
-    <script src="/src/javascript/favicon.js" defer></script>
+
+    <link rel="canonical" href="https://bexxi.dev" />
+
+    <meta property="og:title" content="Bexxi.dev" />
+    <meta property="og:description" content="Hey, I'm Bexxi! I'm a self-taught developer from the USA with a background in web development. Come explore my little corner of the internet!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bexxi.dev" />
+    <meta property="og:image" content="https://bexxi.dev/src/imgs/meta.webp" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Bexxi.dev" />
+    <meta name="twitter:description" content="Self-taught developer sharing creative projects and digital experiments. Come explore my corner of the internet!" />
+    <meta name="twitter:image" content="https://bexxi.dev/src/imgs/meta.webp" />
+    <meta name="twitter:creator" content="@bexxi002" />
 </head>
 <body>
     <div id="header">
@@ -42,9 +66,7 @@
                     <div class="theme-btn" id="theme-btn"></div>
                     <a href="/" class="rainbow-hover" data-text="Home" data-page="home">Home</a>
                     <a href="/about" class="rainbow-hover" data-text="About" data-page="about">About</a>
-                    <a href="/projects" class="rainbow-hover" data-text="Projects" data-page="projects">Projects</a>
-                    <a id="farmost-left" href="/blog" class="rainbow-hover" data-text="Blog" data-page="blog">Blog</a>
-                    <!-- Highlight current page with rainbow glow -->
+                    <a id="farmost-left" href="/projects" class="rainbow-hover" data-text="Projects" data-page="projects">Projects</a>
                 </div>
             </nav>
         </header>
@@ -94,11 +116,6 @@
                             </a>
                         </div>
                         <div class="footer-columb--list-item">
-                            <a href="/blog" data-page="blog">
-                                <span>Blog</span>
-                            </a>
-                        </div>
-                        <div class="footer-columb--list-item">
                             <a href="/projects" data-page="projects">
                                 <span>Projects</span>
                             </a>
@@ -134,7 +151,7 @@
 
                 <div class="footer-column--lg">
                     <a id="pfp-link" href="" target="_blank" rel="noopener noreferrer">
-                        <img id="pfp" src="https://cdn.discordapp.com/avatars/1058244018770817095/9c3a6dac3485d9c0ca653ce717367775?size=1024" alt="Bexxi" />
+                        <img id="pfp" src="https://cdn.discordapp.com/avatars/1058244018770817095/9c3a6dac3485d9c0ca653ce717367775?size=256" alt="Bexxi" loading="lazy" />
                     </a>
 
                     <div><span class="rainbow-glo">Bexxi</span><span class="dotdev-alt">.dev</span></div>
@@ -154,11 +171,11 @@
     <canvas id="canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:1000;"></canvas>
 
     <script src="/src/javascript/router.js"></script>
-    <script src="/src/javascript/confetti.js"></script>
-    <script src="/src/javascript/dotdev.js"></script>
+    <script src="/src/javascript/confetti.js" defer></script>
+    <script src="/src/javascript/dotdev.js" defer></script>
     <script src="/src/javascript/stats.js"></script>
     <script src="/src/javascript/activity.js"></script>
-    <script src="/src/javascript/projects.js"></script>
+    <script src="/src/javascript/projects.js" defer></script>
 </body>
 
 <noscript>
