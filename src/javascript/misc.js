@@ -1,5 +1,41 @@
-// Set theme based on system preferences
-(function () {
+(function() {
+    function getInitialTheme() {
+        try {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                return savedTheme;
+            }
+        } catch (e) {
+            console.log('Could not access theme preference');
+        }
+        
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    
+    const initialTheme = getInitialTheme();
+    document.documentElement.setAttribute('data-theme', initialTheme);
+    
+    const themeColors = {
+        dark: '#0d1b2b',
+        light: '#d4e2f2'
+    };
+    
+    const updateMetaThemeColor = () => {
+        const themeColorMeta = document.getElementById('theme-color-meta');
+        if (themeColorMeta) {
+            themeColorMeta.content = themeColors[initialTheme];
+        }
+    };
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updateMetaThemeColor);
+    } else {
+        updateMetaThemeColor();
+    }
+})();
+
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-toggle');
     const themeColorMeta = document.getElementById('theme-color-meta');
     
     const themeColors = {
@@ -7,31 +43,48 @@
         light: '#d4e2f2'
     };
     
-    function updateThemeColor(theme) {
+    function updateTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
         if (themeColorMeta) {
             themeColorMeta.content = themeColors[theme];
         }
-        document.documentElement.setAttribute('data-theme', theme);
+        
+        try {
+            localStorage.setItem('theme', theme);
+        } catch (e) {
+            console.log('Could not save theme preference');
+        }
+        
+        window.dispatchEvent(new CustomEvent('themeChanged', { 
+            detail: { theme: theme } 
+        }));
     }
     
-    const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    updateThemeColor(systemPreference);
-
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        updateTheme(newTheme);
+    }
+    
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+    
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        updateThemeColor(e.matches ? 'dark' : 'light');
+        try {
+            if (!localStorage.getItem('theme')) {
+                updateTheme(e.matches ? 'dark' : 'light');
+            }
+        } catch (err) {
+            updateTheme(e.matches ? 'dark' : 'light');
+        }
     });
-})();
 
-//---------------------------------------------------------------------
-// Site configuration
-const siteConfig = {
-    version: '0.9.0-beta',
-    githubRepo: 'bexxi002/bexxi.dev'
-};
+    const siteConfig = {
+        version: '0.9.0-beta',
+        githubRepo: 'bexxi002/bexxi.dev'
+    };
 
-//---------------------------------------------------------------------
-// 0.o
-document.addEventListener('DOMContentLoaded', function() {
     const pfp = document.getElementById('pfp');
     if (pfp) {
         pfp.onerror = () => {

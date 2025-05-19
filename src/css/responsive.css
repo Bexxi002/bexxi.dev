@@ -8,9 +8,6 @@
     z-index: 101;
     transition: transform 0.2s ease;
 }
-.mobile-menu-btn:hover {
-    transform: scale(1.1);
-}
 .mobile-menu-btn:focus {
     outline: none;
 }
@@ -94,6 +91,18 @@
     #farmost-left:hover {
         margin: var(--space-0) !important;
     }
+    .theme-toggle:hover {
+        transform: none !important;
+    }
+    .toggle-icon {
+        width: 24px;
+        height: 24px;
+    }
+    .sun-icon,
+    .moon-icon {
+        width: 24px;
+        height: 24px;
+    }
 }
 @media (max-width: 576px) {
     header nav {
@@ -156,6 +165,14 @@
     .about-me, .recent-activity, .about-me--recent-activity---separator, .recent-activity--header, .accounts, .profile {
         width: 100% !important;
         max-width: 90% !important;
+    }
+    .theme-toggle {
+        display: flex !important;
+        margin-left: auto;
+        margin-right: var(--space-200);
+    }
+    .mobile-menu-btn {
+        margin-left: 0;
     }
 }
 @media (max-width: 576px) {

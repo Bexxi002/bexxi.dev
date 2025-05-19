@@ -174,7 +174,6 @@ header nav a:hover {
     margin-right: auto;
 }
 .right {
-    margin-left: auto;
     gap: 25px;
     display: flex;
 }
@@ -425,4 +424,56 @@ footer {
 .form-field {
     display: flex;
     flex-direction: column;
+}
+
+.theme-toggle {
+    display: flex;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-150);
+    color: var(--text);
+    z-index: 101;
+    transition: transform .25s ease;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-left: auto;
+}
+.theme-toggle:hover {
+    transform: scale(1.25);
+}
+.theme-toggle:focus {
+    outline: none;
+}
+.toggle-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.sun-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    transition: all 0.3s ease;
+    width: 20px;
+    height: 20px;
+}
+[data-theme="dark"] .sun-icon {
+    opacity: 0;
+    transform: rotate(180deg) scale(0.8);
+}
+.moon-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.8);
+    transition: all 0.3s ease;
+    width: 20px;
+    height: 20px;
+}
+[data-theme="dark"] .moon-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
 }
