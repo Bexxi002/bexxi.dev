@@ -333,7 +333,7 @@ footer {
 }
 .footer-site-stats {
     font-size: var(--font-200);
-    margin-top: var(--space-800);
+    margin-top: var(--space-1000);
     margin-bottom: -var(--space-400);
 }
 .footer-site-stats p {
